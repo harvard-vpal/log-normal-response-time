@@ -1,10 +1,11 @@
-##This script grabs HarvardX data tables (assumes that "coursedir" contains course data in folders, the folder names will serve as course_ids))
+##This script grabs HarvardX data tables. Create a file "settings.R" from "settings_example.R", providing the path 
+# "coursedir" that contains course data in folders (one for a course), the folder names will serve as course_ids.
 ##It ultimately transforms the data to a data-frame ("Pcheck"), which looks like a submit-event log (problem_id, user_id, correctness, etc.) with variables "logwait1" and "logwait2" that contain logarithms of 1st and 2nd response times
 ##Then it calls the function fit.gaussian() from "fitGaussian.R" to fit our model to these logtime variables.
 # It stores the results creating folders with the same names as it saw in "coursedir". For each course, it stores fit1 and fit2 (outputs of fit.gaussian() for 1st and 2nd response) 
 # and a person_course_survey table (PCS) with the usual HarvardX user variables, and it does so three times: the fit on responses of any correctness, correct only, and incorrect only.
 
-
+source('settings.R')
 source('fitGaussian.R')
 library(plyr)
 
@@ -15,8 +16,6 @@ max.attempt.limit=5
 min.problems=10
 min.users=10
 
-coursedir="/Users/ilr548/Documents/HX_data/Courses"
-# coursedir="/nfs/projects_ci3/c/ci3_charlesriverX/HarvardX/Courses"
 
 ##This script assumes that coursedir contains course data in folders (each course has a folder, the folder name will serve as course_id)
 
